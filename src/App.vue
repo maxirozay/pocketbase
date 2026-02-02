@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import PocketBase, { type RecordModel } from 'pocketbase'
+import Signin from './components/signin.vue'
 
 const pb = new PocketBase('http://127.0.0.1:8090')
 const files = ref<RecordModel[]>([])
@@ -71,10 +72,7 @@ const uploadFile = async (event: Event) => {
     </ul>
   </div>
 
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <Signin />
 </template>
 
 <style scoped></style>

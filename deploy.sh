@@ -1,8 +1,9 @@
 #!/bin/sh
 
+NAME=pocketbase
 SERVER_URL="debian@dev.visioncompliance.ch"
 SSH_KEY="~/.ssh/test"
-REMOTE_PATH="~/pocketbase"
+REMOTE_PATH="~/$NAME"
 
 npm run build
 
@@ -20,7 +21,7 @@ if [ "$1" = "--pb" ]; then
   ssh -i $SSH_KEY $SERVER_URL "chmod +x $REMOTE_PATH/pocketbase_new"
 
   echo "Restarting service..."
-  ssh -i $SSH_KEY $SERVER_URL "sudo systemctl stop pocketbase && mv $REMOTE_PATH/pocketbase_new $REMOTE_PATH/pocketbase && sudo systemctl start pocketbase"
+  ssh -i $SSH_KEY $SERVER_URL "sudo systemctl stop $NAME && mv $REMOTE_PATH/pocketbase_new $REMOTE_PATH/pocketbase && sudo systemctl start $NAME"
   echo "PocketBase binary updated and service restarted."
 else
   echo "Skipping binary update. Run with --pb to update the server binary."

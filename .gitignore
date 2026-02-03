@@ -36,6 +36,6 @@ coverage
 __screenshots__/
 
 # PocketBase
-pocketbase/pocketbase
+pocketbase/pocketbase*
 pb_data
 pb_public

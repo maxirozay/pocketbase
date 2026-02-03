@@ -21,3 +21,29 @@ location /s/ {
     proxy_hide_header x-amz-id-2;
 }
 ```
+
+## start service
+
+Create `/lib/systemd/system/<project>.service`
+
+```
+[Unit]
+Description = <project>
+
+[Service]
+Type             = simple
+User             = root
+Group            = root
+LimitNOFILE      = 4096
+Restart          = always
+RestartSec       = 5s
+StandardOutput   = append:/home/debian/<project>/std.log
+StandardError    = append:/home/debian/<project>/std.log
+WorkingDirectory = /home/debian/<project>
+ExecStart        = /home/debian/<project>/pocketbase serve --http=127.0.0.1:8090
+
+[Install]
+WantedBy = multi-user.target
+```
+
+Start it `sudo systemctl enable --now <project>`

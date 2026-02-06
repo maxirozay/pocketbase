@@ -23,6 +23,9 @@ if [ "$1" = "--pb" ]; then
   echo "Restarting service..."
   ssh -i $SSH_KEY $SERVER_URL "sudo systemctl stop $NAME && mv $REMOTE_PATH/pocketbase_new $REMOTE_PATH/pocketbase && sudo systemctl start $NAME"
   echo "PocketBase binary updated and service restarted."
+elif [ "$1" = "--r" ]; then
+  ssh -i $SSH_KEY $SERVER_URL "sudo systemctl restart $NAME"
+  echo "Service restarted."
 else
   echo "Skipping binary update. Run with --pb to update the server binary."
 fi

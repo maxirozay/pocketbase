@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import PocketBase from 'pocketbase'
 
-const pb = new PocketBase('http://127.0.0.1:8090')
+const pb = new PocketBase(import.meta.env.VITE_POCKETBASE_URL)
 
 const authData = ref(pb.authStore.record)
 let otpId = ''
@@ -48,6 +48,15 @@ function signin() {
     else signInWithPassword()
   }, 100) // wait for paste event to complete
 }
+
+function signInWithMicrosoft() {
+  pb.collection('users').authWithOAuth2({
+    provider: 'microsoft'
+  }).then((data) => {
+    authData.value = data.record
+    console.log(data)
+  })
+}
 </script>
 
 <template>
@@ -92,5 +101,6 @@ function signin() {
     >
       Sign out
     </button>
+    <button @click="signInWithMicrosoft">Sign in with Microsoft</button>
   </div>
 </template>

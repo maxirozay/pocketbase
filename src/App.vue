@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import PocketBase, { type RecordModel } from 'pocketbase'
 import Signin from './components/signin.vue'
 
-const pb = new PocketBase('http://127.0.0.1:8090')
+const pb = new PocketBase(import.meta.env.VITE_POCKETBASE_URL)
 const files = ref<RecordModel[]>([])
 
 const STORAGE_URL = 'https://s3.pub2.infomaniak.cloud/object/v1/AUTH_e85d8f34a2a44b2c8f782474423c5f13/test'
